@@ -1,11 +1,8 @@
-import DashboardNavbar from "@/components/dashboard-navbar";
-import ManageSubscription from "@/components/manage-subscription";
-import { SubscriptionCheck } from "@/components/subscription-check";
-import { InfoIcon, UserCircle } from "lucide-react";
-import { redirect } from "next/navigation";
+import DashboardHeader from "@/components/dashboard-header";
+import DashboardWidgets from "@/components/dashboard-widgets";
+import QuestionnaireWrapper from "@/components/questionnaire-wrapper";
 import { createClient } from "../../../supabase/server";
-import { manageSubscriptionAction } from "../actions";
-import { Suspense } from "react";
+import { redirect } from "next/navigation";
 
 export default async function Dashboard() {
   const supabase = await createClient();
@@ -18,48 +15,96 @@ export default async function Dashboard() {
     return redirect("/sign-in");
   }
 
-  const result = await manageSubscriptionAction(user?.id);
+  // Sample data for dashboard widgets
+  const nextAppointment = {
+    id: "upcoming-1",
+    therapistName: "Dra. Ana Muller",
+    date: new Date(new Date().getTime() + 3 * 24 * 60 * 60 * 1000), // 3 days from now
+    imageUrl: "https://placehold.co/200x200/9F7AEA/FFFFFF?text=AM"
+  };
 
-  if (!result) {
-    return redirect("/pricing");
-  }
+  const resources = [
+    {
+      id: "1",
+      title: "Técnicas de respiración para calmar la ansiedad",
+      type: "video",
+      duration: "5 min",
+      imageUrl: "https://placehold.co/300x200/E6FFFA/333333?text=Ansiedad"
+    },
+    {
+      id: "2",
+      title: "Guía para mejorar la calidad del sueño",
+      type: "pdf",
+      imageUrl: "https://placehold.co/300x200/E6F0FF/333333?text=Sueño"
+    },
+    {
+      id: "3",
+      title: "Meditación guiada para reducir el estrés",
+      type: "video",
+      duration: "10 min",
+      imageUrl: "https://placehold.co/300x200/F0E6FF/333333?text=Meditación"
+    },
+    {
+      id: "4",
+      title: "Técnicas de comunicación asertiva",
+      type: "pdf",
+      imageUrl: "https://placehold.co/300x200/FFE6E6/333333?text=Comunicación"
+    }
+  ];
+
+  const recommendedTherapists = [
+    {
+      id: "1",
+      name: "Dra. Ana Muller",
+      specialty: "Psicóloga Clínica • Ansiedad, Depresión",
+      rating: 4.9,
+      imageUrl: "https://placehold.co/200x200/9F7AEA/FFFFFF?text=AM",
+      price: "$40.000 / sesión"
+    },
+    {
+      id: "2",
+      name: "Carla Farias",
+      specialty: "Psicóloga Infantil • Problemas de Aprendizaje",
+      rating: 4.7,
+      imageUrl: "https://placehold.co/200x200/9F7AEA/FFFFFF?text=CF",
+      price: "$35.000 / sesión"
+    },
+    {
+      id: "3",
+      name: "Dr. Juan Perez",
+      specialty: "Psicólogo Clínico • Terapia de Pareja",
+      rating: 4.8,
+      imageUrl: "https://placehold.co/200x200/9F7AEA/FFFFFF?text=JP",
+      price: "$42.000 / sesión"
+    }
+  ];
 
   return (
-    <SubscriptionCheck>
-      <DashboardNavbar />
-      <main className="w-full">
-        <div className="container mx-auto px-4 py-8 flex flex-col gap-8">
-          <div className="flex justify-end">
-            <Suspense fallback={<div>Loading...</div>}>
-              {result?.url && <ManageSubscription redirectUrl={result?.url!} />}
-            </Suspense>
-          </div>
-          {/* Header Section */}
-          <header className="flex flex-col gap-4">
-            <h1 className="text-3xl font-bold">Dashboard</h1>
-            <div className="bg-secondary/50 text-sm p-3 px-4 rounded-lg text-muted-foreground flex gap-2 items-center">
-              <InfoIcon size="14" />
-              <span>This is a protected page only visible to authenticated users</span>
-            </div>
-          </header>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <DashboardHeader user={user} />
+      
+      {/* Questionnaire for new users */}
+      <QuestionnaireWrapper />
 
-          {/* User Profile Section */}
-          <section className="bg-card rounded-xl p-6 border shadow-sm">
-            <div className="flex items-center gap-4 mb-6">
-              <UserCircle size={48} className="text-primary" />
-              <div>
-                <h2 className="font-semibold text-xl">User Profile</h2>
-                <p className="text-sm text-muted-foreground">{user.email}</p>
-              </div>
-            </div>
-            <div className="bg-muted/50 rounded-lg p-4 overflow-hidden">
-              <pre className="text-xs font-mono max-h-48 overflow-auto">
-                {JSON.stringify(user, null, 2)}
-              </pre>
-            </div>
-          </section>
+      <main className="container mx-auto px-4 py-6 pt-24 pb-16">
+        <div className="max-w-6xl mx-auto">
+          {/* Dashboard Widgets */}
+          <DashboardWidgets 
+            nextAppointment={nextAppointment}
+            resources={resources}
+            recommendedTherapists={recommendedTherapists}
+            completedSessions={12}
+            totalMood={65}
+            userName={user.email?.split('@')[0] || 'Usuario'}
+          />
         </div>
       </main>
-    </SubscriptionCheck>
+
+      {/* Animated background elements */}
+      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 left-10 w-72 h-72 bg-purple-200 dark:bg-purple-800 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl opacity-30 dark:opacity-20 animate-blob" />
+        <div className="absolute top-3/4 right-10 w-72 h-72 bg-blue-200 dark:bg-blue-800 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl opacity-30 dark:opacity-20 animate-blob animation-delay-2000" />
+      </div>
+    </div>
   );
 }

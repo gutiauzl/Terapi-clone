@@ -8,8 +8,8 @@ import { ThemeProvider } from "@/components/theme-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Tempo - Modern SaaS Starter",
-  description: "A modern full-stack starter template powered by Next.js",
+  title: "Terapi - Encuentra a tu Psicólogo Ideal",
+  description: "Terapi es la plataforma de psicología online más completa de latinoamérica. Conecta con psicólogos certificados y encuentra el apoyo que necesitas.",
 };
 
 export default function RootLayout({

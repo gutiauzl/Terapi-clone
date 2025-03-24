@@ -12,6 +12,23 @@ const nextConfig = {
 
     return config;
   },
+  // Configure allowed image domains
+  images: {
+    domains: ['via.placeholder.com', 'placeholder.com', 'placehold.co', 'randomuser.me'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'placehold.co',
+      },
+      {
+        protocol: 'https',
+        hostname: 'randomuser.me',
+      },
+    ],
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+  },
   // Disable static optimization to avoid middleware issues
   poweredByHeader: false,
   reactStrictMode: true,

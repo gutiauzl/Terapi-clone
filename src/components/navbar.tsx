@@ -1,65 +1,75 @@
 import Link from "next/link";
+import Image from "next/image";
 import { createClient } from "../../supabase/server";
 import { Button } from "./ui/button";
-import { User, UserCircle, Brain } from "lucide-react";
-import UserProfile from "./user-profile";
+import { ThemeToggle } from "./theme-toggle";
+import { Menu } from "lucide-react";
 
 export default async function Navbar() {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const {
     data: { user },
-  } = await (await supabase).auth.getUser();
+  } = await supabase.auth.getUser();
 
   return (
-    <nav className="w-full border-b border-gray-200 bg-white py-3">
-      <div className="container mx-auto px-4 flex justify-between items-center">
+    <nav className="fixed w-full top-0 left-0 right-0 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 z-50 backdrop-blur-sm bg-opacity-80 dark:bg-opacity-80">
+      <div className="container mx-auto px-4 flex justify-between items-center h-16">
         <Link
           href="/"
           prefetch
-          className="text-2xl font-bold flex items-center text-teal-600"
+          className="flex items-center"
         >
-          <Brain className="mr-2 h-6 w-6" />
-          Terapi
+          <Image 
+            src="https://placehold.co/120x40/8B5CF6/FFFFFF?text=Terapi" 
+            alt="Terapi"
+            width={120}
+            height={40}
+            className="h-8 w-auto"
+          />
         </Link>
-        <div className="hidden md:flex space-x-6">
-          <Link href="/#features" className="text-gray-600 hover:text-teal-600">
-            Cómo Funciona
+        
+        <div className="hidden md:flex items-center space-x-8">
+          <Link href="/blog" className="text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+            Blog
           </Link>
-          <Link href="/#pricing" className="text-gray-600 hover:text-teal-600">
-            Planes
+          <Link href="/for-companies" className="text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+            Para empresas
           </Link>
-          <Link href="/#" className="text-gray-600 hover:text-teal-600">
-            Terapeutas
+          <Link href="/for-psychologists" className="text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+            Para psicólogos
           </Link>
         </div>
-        <div className="flex gap-4 items-center">
+        
+        <div className="flex gap-3 items-center">
+          <ThemeToggle />
+          
           {user ? (
             <>
               <Link
                 href="/dashboard"
-                className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900"
+                className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 rounded-full transition-all duration-300"
               >
-                <Button className="bg-teal-600 hover:bg-teal-700">
-                  Mi Cuenta
-                </Button>
+                Mi Cuenta
               </Link>
-              <UserProfile />
             </>
           ) : (
             <>
               <Link
                 href="/sign-in"
-                className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-teal-600"
+                className="hidden md:inline-flex px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
               >
                 Iniciar Sesión
               </Link>
               <Link
                 href="/sign-up"
-                className="px-4 py-2 text-sm font-medium text-white bg-teal-600 rounded-md hover:bg-teal-700"
+                className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 rounded-full transition-all duration-300"
               >
                 Registrarse
               </Link>
+              <Button variant="ghost" size="icon" className="md:hidden">
+                <Menu className="h-5 w-5" />
+              </Button>
             </>
           )}
         </div>
