@@ -1,22 +1,43 @@
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
-import { createClient } from "../../../supabase/server";
+'use client';
+
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { createClient } from "../../../supabase/client";
 import DashboardHeader from '@/components/dashboard-header';
 import AppointmentsClient from '@/components/appointments-client';
+import { User } from '@supabase/supabase-js';
 
-export default async function AppointmentsPage() {
-  // Obtener el cliente de Supabase
-  const supabase = await createClient();
+export default function AppointmentsPage() {
+  const router = useRouter();
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
   
-  // Verificar autenticación
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  
-  // Si no hay usuario autenticado, redirigir a inicio de sesión
-  if (!user) {
-    redirect('/sign-in');
-  }
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const supabase = createClient();
+        
+        // Verificar si hay una sesión activa
+        const { data: { session } } = await supabase.auth.getSession();
+        
+        if (!session) {
+          console.log("No session found in appointments page");
+          router.push('/sign-in');
+          return;
+        }
+        
+        // Obtener los datos del usuario
+        const { data } = await supabase.auth.getUser();
+        setUser(data.user);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error checking user session:', error);
+        router.push('/sign-in');
+      }
+    };
+    
+    checkUser();
+  }, [router]);
 
   // Datos de ejemplo para citas (en una aplicación real, estos vendrían de la base de datos)
   const upcomingAppointments = [
@@ -85,8 +106,19 @@ export default async function AppointmentsPage() {
     },
   ];
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#F5F5F5] dark:bg-[#0E1920] flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-t-[#142619] dark:border-t-[#8A7D68] border-[#D7D7D6]/30 dark:border-[#161616]/30 rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-[#6B6B6B] dark:text-[#D7D7D6] natus-body">Cargando...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-[#D7D7D6]/20 dark:bg-[#161616]">
       <DashboardHeader user={user} />
       
       <main className="container mx-auto px-4 py-8 pt-24">
@@ -99,8 +131,8 @@ export default async function AppointmentsPage() {
 
       {/* Animated background elements */}
       <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-10 w-72 h-72 bg-purple-200 dark:bg-purple-800 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl opacity-30 dark:opacity-20 animate-blob" />
-        <div className="absolute top-3/4 right-10 w-72 h-72 bg-blue-200 dark:bg-blue-800 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl opacity-30 dark:opacity-20 animate-blob animation-delay-2000" />
+        <div className="absolute top-1/4 left-10 w-72 h-72 bg-[#8A7D68]/30 dark:bg-[#8A7D68]/20 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl opacity-30 dark:opacity-20 animate-blob" />
+        <div className="absolute top-3/4 right-10 w-72 h-72 bg-[#D7D7D6]/40 dark:bg-[#D7D7D6]/20 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl opacity-30 dark:opacity-20 animate-blob animation-delay-2000" />
       </div>
     </div>
   );

@@ -55,7 +55,7 @@ export default function Footer() {
             <h3 className="font-medium text-[#161616] dark:text-white mb-4 natus-heading">Para Empresas</h3>
             <ul className="space-y-3">
               <li><Link href="#" className="text-sm text-[#6B6B6B] dark:text-[#D7D7D6] hover:text-[#142619] dark:hover:text-[#8A7D68] transition-colors natus-body">NATUS para Empresas</Link></li>
-              <li><Link href="#" className="text-sm text-[#6B6B6B] dark:text-[#D7D7D6] hover:text-[#142619] dark:hover:text-[#8A7D68] transition-colors natus-body">Para Psicólogos</Link></li>
+              <li><Link href="/for-facilitators" className="text-sm text-[#6B6B6B] dark:text-[#D7D7D6] hover:text-[#142619] dark:hover:text-[#8A7D68] transition-colors natus-body">Para Psicólogos</Link></li>
               <li><Link href="#" className="text-sm text-[#6B6B6B] dark:text-[#D7D7D6] hover:text-[#142619] dark:hover:text-[#8A7D68] transition-colors natus-body">Programa de Afiliados</Link></li>
             </ul>
           </div>

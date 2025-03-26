@@ -263,7 +263,7 @@ export default function MessagingClient({ userId, conversations }: MessagingClie
   };
 
   return (
-    <div className="h-[calc(100vh-96px)] bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/30 overflow-hidden">
+    <div className="h-[calc(100vh-96px)] bg-white dark:bg-[#161616] rounded-xl shadow-md dark:shadow-[#0E1920]/30 overflow-hidden">
       <div className="flex h-full">
         {/* Sidebar de conversaciones */}
         <AnimatePresence>
@@ -273,26 +273,26 @@ export default function MessagingClient({ userId, conversations }: MessagingClie
               animate={{ width: '100%', opacity: 1 }}
               exit={{ width: 0, opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="w-full md:w-80 lg:w-96 border-r border-gray-100 dark:border-gray-700 flex flex-col"
+              className="w-full md:w-80 lg:w-96 border-r border-[#D7D7D6] dark:border-[#0E1920] flex flex-col"
             >
-              <div className="p-4 border-b border-gray-100 dark:border-gray-700">
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Mensajes</h2>
+              <div className="p-4 border-b border-[#D7D7D6] dark:border-[#0E1920]">
+                <h2 className="text-lg font-semibold text-[#161616] dark:text-[#D7D7D6] mb-4 natus-heading">Mensajes</h2>
                 <div className="relative">
                   <input
                     type="text"
                     placeholder="Buscar conversaciones..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full py-2 pl-9 pr-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:text-white"
+                    className="w-full py-2 pl-9 pr-3 bg-[#D7D7D6]/20 dark:bg-[#0E1920]/50 border border-[#D7D7D6] dark:border-[#0E1920] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#142619] dark:focus:ring-[#8A7D68] focus:border-transparent dark:text-[#D7D7D6] natus-body"
                   />
-                  <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
+                  <Search className="absolute left-3 top-2.5 h-4 w-4 text-[#6B6B6B] dark:text-[#D7D7D6]" />
                 </div>
               </div>
               
               <div className="flex-1 overflow-y-auto">
                 {filteredConversations.length === 0 ? (
                   <div className="p-4 text-center">
-                    <p className="text-gray-500 dark:text-gray-400">No se encontraron conversaciones</p>
+                    <p className="text-[#6B6B6B] dark:text-[#D7D7D6] natus-body">No se encontraron conversaciones</p>
                   </div>
                 ) : (
                   filteredConversations.map((conversation) => (
@@ -304,9 +304,9 @@ export default function MessagingClient({ userId, conversations }: MessagingClie
                           setShowSidebar(false);
                         }
                       }}
-                      className={`w-full flex items-start p-4 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors relative ${
+                      className={`w-full flex items-start p-4 hover:bg-[#D7D7D6]/10 dark:hover:bg-[#0E1920]/30 transition-colors relative ${
                         selectedConversation?.id === conversation.id
-                          ? 'bg-gray-100 dark:bg-gray-700'
+                          ? 'bg-[#D7D7D6]/20 dark:bg-[#0E1920]/50'
                           : ''
                       }`}
                     >
@@ -319,30 +319,30 @@ export default function MessagingClient({ userId, conversations }: MessagingClie
                           className="rounded-full object-cover"
                         />
                         {conversation.isOnline && (
-                          <div className="absolute -bottom-1 -right-1 bg-green-500 p-1.5 rounded-full border-2 border-white dark:border-gray-800"></div>
+                          <div className="absolute -bottom-1 -right-1 bg-[#142619] dark:bg-[#8A7D68] p-1.5 rounded-full border-2 border-white dark:border-[#161616]"></div>
                         )}
                       </div>
                       <div className="flex-1 text-left">
                         <div className="flex justify-between items-baseline">
-                          <h3 className="font-medium text-gray-900 dark:text-white">
+                          <h3 className="font-medium text-[#161616] dark:text-[#D7D7D6] natus-heading">
                             {conversation.participantName}
                           </h3>
-                          <span className="text-xs text-gray-500 dark:text-gray-400">
+                          <span className="text-xs text-[#6B6B6B] dark:text-[#D7D7D6] natus-body">
                             {formatRelativeTime(conversation.lastMessage.timestamp)}
                           </span>
                         </div>
                         <p 
-                          className={`text-sm truncate ${
+                          className={`text-sm truncate natus-body ${
                             conversation.unreadCount > 0
-                              ? 'text-gray-900 dark:text-white font-medium'
-                              : 'text-gray-500 dark:text-gray-400'
+                              ? 'text-[#161616] dark:text-[#D7D7D6] font-medium'
+                              : 'text-[#6B6B6B] dark:text-[#D7D7D6]/80'
                           }`}
                         >
                           {conversation.lastMessage.content}
                         </p>
                       </div>
                       {conversation.unreadCount > 0 && (
-                        <div className="absolute top-4 right-4 min-w-5 h-5 flex items-center justify-center bg-purple-600 text-white text-xs font-medium rounded-full px-1.5">
+                        <div className="absolute top-4 right-4 min-w-5 h-5 flex items-center justify-center bg-[#142619] dark:bg-[#8A7D68] text-white dark:text-[#161616] text-xs font-medium rounded-full px-1.5">
                           {conversation.unreadCount}
                         </div>
                       )}
@@ -362,14 +362,14 @@ export default function MessagingClient({ userId, conversations }: MessagingClie
           {selectedConversation ? (
             <>
               {/* Encabezado de la conversación */}
-              <div className="flex items-center justify-between p-4 border-b border-gray-100 dark:border-gray-700">
+              <div className="flex items-center justify-between p-4 border-b border-[#D7D7D6] dark:border-[#0E1920]">
                 <div className="flex items-center">
                   {!showSidebar && (
                     <button
                       onClick={() => setShowSidebar(true)}
-                      className="p-2 mr-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors md:hidden"
+                      className="p-2 mr-2 rounded-full hover:bg-[#D7D7D6]/20 dark:hover:bg-[#0E1920]/50 transition-colors md:hidden"
                     >
-                      <ChevronLeft className="h-5 w-5 text-gray-600 dark:text-gray-300" />
+                      <ChevronLeft className="h-5 w-5 text-[#6B6B6B] dark:text-[#D7D7D6]" />
                     </button>
                   )}
                   <div className="relative">
@@ -381,27 +381,27 @@ export default function MessagingClient({ userId, conversations }: MessagingClie
                       className="rounded-full object-cover"
                     />
                     {selectedConversation.isOnline && (
-                      <div className="absolute -bottom-1 -right-1 bg-green-500 p-1 rounded-full border-2 border-white dark:border-gray-800"></div>
+                      <div className="absolute -bottom-1 -right-1 bg-[#142619] dark:bg-[#8A7D68] p-1 rounded-full border-2 border-white dark:border-[#161616]"></div>
                     )}
                   </div>
                   <div className="ml-3">
-                    <h3 className="font-medium text-gray-900 dark:text-white">
+                    <h3 className="font-medium text-[#161616] dark:text-[#D7D7D6] natus-heading">
                       {selectedConversation.participantName}
                     </h3>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                    <p className="text-xs text-[#6B6B6B] dark:text-[#D7D7D6] natus-body">
                       {selectedConversation.isOnline ? 'En línea' : 'Desconectado'}
                     </p>
                   </div>
                 </div>
                 <div className="flex">
-                  <button className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-                    <Phone className="h-5 w-5 text-gray-600 dark:text-gray-300" />
+                  <button className="p-2 rounded-full hover:bg-[#D7D7D6]/20 dark:hover:bg-[#0E1920]/50 transition-colors">
+                    <Phone className="h-5 w-5 text-[#6B6B6B] dark:text-[#D7D7D6]" />
                   </button>
-                  <button className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-                    <Video className="h-5 w-5 text-gray-600 dark:text-gray-300" />
+                  <button className="p-2 rounded-full hover:bg-[#D7D7D6]/20 dark:hover:bg-[#0E1920]/50 transition-colors">
+                    <Video className="h-5 w-5 text-[#6B6B6B] dark:text-[#D7D7D6]" />
                   </button>
-                  <button className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-                    <MoreVertical className="h-5 w-5 text-gray-600 dark:text-gray-300" />
+                  <button className="p-2 rounded-full hover:bg-[#D7D7D6]/20 dark:hover:bg-[#0E1920]/50 transition-colors">
+                    <MoreVertical className="h-5 w-5 text-[#6B6B6B] dark:text-[#D7D7D6]" />
                   </button>
                 </div>
               </div>
@@ -416,7 +416,7 @@ export default function MessagingClient({ userId, conversations }: MessagingClie
                     <div key={message.id} className="space-y-2">
                       {shouldShowDate(message, index) && (
                         <div className="flex justify-center my-4">
-                          <span className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs rounded-full">
+                          <span className="px-3 py-1 bg-[#D7D7D6]/20 dark:bg-[#0E1920]/30 text-[#6B6B6B] dark:text-[#D7D7D6] text-xs rounded-full natus-body">
                             {message.timestamp.toLocaleDateString('es-ES', {
                               weekday: 'long',
                               day: 'numeric',
@@ -443,10 +443,10 @@ export default function MessagingClient({ userId, conversations }: MessagingClie
                           
                           <div className={`max-w-[80%] ${consecutive ? (isUser ? 'mr-0' : 'ml-0') : ''}`}>
                             <div
-                              className={`rounded-xl px-4 py-2 inline-block ${
+                              className={`rounded-xl px-4 py-2 inline-block natus-body ${
                                 isUser
-                                  ? 'bg-purple-600 text-white rounded-br-none'
-                                  : 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-bl-none'
+                                  ? 'bg-gradient-to-r from-[#142619] to-[#0E1920] text-white rounded-br-none'
+                                  : 'bg-[#D7D7D6]/20 dark:bg-[#0E1920]/30 text-[#161616] dark:text-[#D7D7D6] rounded-bl-none'
                               }`}
                             >
                               <p className="whitespace-pre-wrap break-words">{message.content}</p>
@@ -466,7 +466,7 @@ export default function MessagingClient({ userId, conversations }: MessagingClie
                                           />
                                           <div className="absolute inset-0 bg-black bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
                                             <button className="p-2 bg-white rounded-full">
-                                              <ImageIcon className="h-4 w-4 text-gray-900" />
+                                              <ImageIcon className="h-4 w-4 text-[#161616]" />
                                             </button>
                                           </div>
                                         </div>
@@ -475,10 +475,10 @@ export default function MessagingClient({ userId, conversations }: MessagingClie
                                           href={attachment.url}
                                           target="_blank"
                                           rel="noopener noreferrer"
-                                          className={`flex items-center p-2 rounded-lg ${
+                                          className={`flex items-center p-2 rounded-lg natus-body ${
                                             isUser
-                                              ? 'bg-purple-700 hover:bg-purple-800'
-                                              : 'bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700'
+                                              ? 'bg-[#0E1920] hover:bg-[#142619]'
+                                              : 'bg-[#D7D7D6]/30 dark:bg-[#0E1920]/50 hover:bg-[#D7D7D6]/50 dark:hover:bg-[#0E1920]/70'
                                           } transition-colors`}
                                         >
                                           <File className="h-4 w-4 mr-2" />
@@ -494,14 +494,14 @@ export default function MessagingClient({ userId, conversations }: MessagingClie
                             </div>
                             
                             <div className={`text-xs mt-1 flex items-center ${isUser ? 'justify-end' : 'justify-start'}`}>
-                              <span className="text-gray-500 dark:text-gray-400 mr-1">
+                              <span className="text-[#6B6B6B] dark:text-[#D7D7D6] mr-1 natus-body">
                                 {formatTime(message.timestamp)}
                               </span>
                               {isUser && (
-                                <span className="text-gray-500 dark:text-gray-400">
+                                <span className="text-[#6B6B6B] dark:text-[#D7D7D6]">
                                   {message.status === 'sent' && <Check className="h-3 w-3" />}
                                   {message.status === 'delivered' && <CheckCheck className="h-3 w-3" />}
-                                  {message.status === 'read' && <CheckCheck className="h-3 w-3 text-blue-500" />}
+                                  {message.status === 'read' && <CheckCheck className="h-3 w-3 text-[#142619] dark:text-[#8A7D68]" />}
                                 </span>
                               )}
                             </div>
@@ -515,7 +515,7 @@ export default function MessagingClient({ userId, conversations }: MessagingClie
               </div>
 
               {/* Área de entrada de mensaje */}
-              <div className="p-4 border-t border-gray-100 dark:border-gray-700">
+              <div className="p-4 border-t border-[#D7D7D6] dark:border-[#0E1920]">
                 <div className="relative">
                   <input
                     type="text"
@@ -523,22 +523,22 @@ export default function MessagingClient({ userId, conversations }: MessagingClie
                     value={messageInput}
                     onChange={(e) => setMessageInput(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    className="w-full py-3 px-4 pr-24 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-full focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:text-white"
+                    className="w-full py-3 px-4 pr-24 bg-[#D7D7D6]/20 dark:bg-[#0E1920]/50 border border-[#D7D7D6] dark:border-[#0E1920] rounded-full focus:outline-none focus:ring-2 focus:ring-[#142619] dark:focus:ring-[#8A7D68] focus:border-transparent dark:text-[#D7D7D6] natus-body"
                   />
                   <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center space-x-1">
-                    <button className="p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
-                      <Smile className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+                    <button className="p-1.5 rounded-full hover:bg-[#D7D7D6]/30 dark:hover:bg-[#0E1920]/70 transition-colors">
+                      <Smile className="h-5 w-5 text-[#6B6B6B] dark:text-[#D7D7D6]" />
                     </button>
-                    <button className="p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
-                      <Paperclip className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+                    <button className="p-1.5 rounded-full hover:bg-[#D7D7D6]/30 dark:hover:bg-[#0E1920]/70 transition-colors">
+                      <Paperclip className="h-5 w-5 text-[#6B6B6B] dark:text-[#D7D7D6]" />
                     </button>
                     <button
                       onClick={sendMessage}
                       disabled={!messageInput.trim()}
                       className={`p-1.5 rounded-full ${
                         messageInput.trim()
-                          ? 'bg-purple-600 hover:bg-purple-700 text-white'
-                          : 'bg-gray-200 dark:bg-gray-600 text-gray-400 dark:text-gray-500 cursor-not-allowed'
+                          ? 'bg-[#142619] hover:bg-[#0E1920] text-white'
+                          : 'bg-[#D7D7D6]/50 dark:bg-[#0E1920]/70 text-[#6B6B6B] dark:text-[#D7D7D6]/50 cursor-not-allowed'
                       } transition-colors`}
                     >
                       <Send className="h-5 w-5" />
@@ -548,18 +548,18 @@ export default function MessagingClient({ userId, conversations }: MessagingClie
               </div>
             </>
           ) : (
-            <div className="flex flex-col items-center justify-center h-full p-6 text-center text-gray-500 dark:text-gray-400">
-              <div className="w-16 h-16 mb-4 flex items-center justify-center rounded-full bg-purple-100 dark:bg-purple-900/30">
-                <MessageSquare className="h-8 w-8 text-purple-600 dark:text-purple-400" />
+            <div className="flex flex-col items-center justify-center h-full p-6 text-center text-[#6B6B6B] dark:text-[#D7D7D6]">
+              <div className="w-16 h-16 mb-4 flex items-center justify-center rounded-full bg-[#142619]/10 dark:bg-[#8A7D68]/20">
+                <MessageSquare className="h-8 w-8 text-[#142619] dark:text-[#8A7D68]" />
               </div>
-              <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Tus mensajes</h3>
-              <p className="max-w-md mb-4">
+              <h3 className="text-lg font-medium text-[#161616] dark:text-[#D7D7D6] mb-2 natus-heading">Tus mensajes</h3>
+              <p className="max-w-md mb-4 natus-body">
                 Selecciona una conversación para ver tus mensajes o comienza una nueva conversación con tu terapeuta.
               </p>
               {!showSidebar && (
                 <button
                   onClick={() => setShowSidebar(true)}
-                  className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+                  className="px-4 py-2 bg-gradient-to-r from-[#142619] to-[#0E1920] hover:from-[#0E1920] hover:to-[#142619] text-white rounded-full transition-colors natus-body"
                 >
                   Ver conversaciones
                 </button>

@@ -130,10 +130,10 @@ export default function QuestionnaireModal() {
         setCompleted(true);
         localStorage.setItem('questionnaireCompleted', 'true');
         
-        // Redirect after a brief delay
+        // Redirect after a brief delay (reduced from 2000ms to 1000ms)
         setTimeout(() => {
           router.push('/therapist-matches');
-        }, 2000);
+        }, 1000);
       }
     } catch (error) {
       console.error('Error saving to localStorage:', error);

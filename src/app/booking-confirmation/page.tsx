@@ -1,116 +1,163 @@
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import Link from "next/link";
-import { Calendar, Clock, Video, ArrowRight, CheckCircle, Download } from "lucide-react";
+'use client';
+
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import { Calendar, Clock, MapPin, Video, AlertCircle, CalendarPlus, Home } from 'lucide-react';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 export default function BookingConfirmation() {
+  const router = useRouter();
+
+  // Esta información vendría de la base de datos en una implementación real
+  const appointment = {
+    therapist: {
+      name: "Dra. María González",
+      image: "https://randomuser.me/api/portraits/women/44.jpg",
+      specialty: "Psicóloga Clínica"
+    },
+    date: "Jueves, 20 de Julio de 2023",
+    time: "15:30",
+    duration: "50 minutos",
+    type: "Videollamada",
+    cost: "$45.000"
+  };
+
+  // Función para agregar al calendario
+  const addToCalendar = () => {
+    alert("Funcionalidad de agregar al calendario implementada en versión producción");
+  };
+
   return (
-    <div className="bg-gray-50 min-h-screen">
-      <header className="bg-white border-b border-gray-200 fixed top-0 left-0 right-0 z-10">
-        <div className="container mx-auto px-4 py-4">
-          <Link href="/">
+    <div className="min-h-screen bg-[#F5F5F5] dark:bg-[#0E1920] pt-8 pb-16">
+      <div className="container mx-auto px-4">
+        <header className="flex justify-center mb-8">
+          <Link href="/" className="flex items-center">
             <Image 
-              src="https://placehold.co/120x40/8B5CF6/FFFFFF?text=Terapi" 
-              alt="Terapi" 
+              src="/natus-logo.svg" 
+              alt="Natus Logo" 
               width={120} 
               height={40} 
-              className="h-8 w-auto" 
+              className="h-10 w-auto" 
             />
           </Link>
-        </div>
-      </header>
+        </header>
 
-      <main className="container mx-auto px-4 py-6 pt-24 pb-16">
-        <div className="max-w-2xl mx-auto">
-          <div className="bg-white rounded-lg shadow-md p-8 mb-8 text-center">
-            <div className="bg-green-100 rounded-full mx-auto w-16 h-16 flex items-center justify-center mb-6">
-              <CheckCircle className="w-8 h-8 text-green-600" />
+        <motion.main 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="max-w-2xl mx-auto bg-white dark:bg-[#161616] rounded-xl shadow-md dark:shadow-[#161616]/30 overflow-hidden"
+        >
+          <div className="p-6 md:p-8 border-b border-[#D7D7D6]/20 dark:border-[#161616]/50">
+            <div className="flex items-center justify-center bg-[#142619]/10 dark:bg-[#8A7D68]/20 p-3 rounded-full w-14 h-14 mx-auto mb-4">
+              <Calendar className="h-8 w-8 text-[#142619] dark:text-[#8A7D68]" />
             </div>
-            <h1 className="text-2xl font-bold text-gray-800 mb-4">¡Reserva confirmada!</h1>
-            <p className="text-gray-600 mb-6">
-              Tu sesión con la Dra. Ana Muller ha sido agendada exitosamente.
+            <h1 className="text-2xl font-bold text-center text-[#161616] dark:text-[#D7D7D6] mb-2 natus-heading">¡Tu cita ha sido agendada!</h1>
+            <p className="text-center text-[#6B6B6B] dark:text-[#D7D7D6] mb-6 natus-body">
+              Hemos enviado un correo de confirmación con todos los detalles a tu email registrado
             </p>
-            <div className="w-24 h-1 bg-purple-200 mx-auto"></div>
-          </div>
 
-          <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-            <h2 className="text-lg font-bold text-gray-800 mb-4">Detalles de la cita</h2>
-            
-            <div className="space-y-4">
-              <div className="flex items-start py-3 border-b border-gray-100">
-                <Image 
-                  src="https://placehold.co/200x200/9F7AEA/FFFFFF?text=AM" 
-                  alt="Dra. Ana Muller" 
-                  width={60} 
-                  height={60} 
-                  className="rounded-lg mr-4"
-                />
+            <div className="bg-[#142619]/5 dark:bg-[#8A7D68]/10 rounded-xl p-6 mb-6">
+              <div className="flex items-center mb-4">
+                <div className="relative mr-4">
+                  <Image 
+                    src={appointment.therapist.image} 
+                    alt={appointment.therapist.name} 
+                    width={60} 
+                    height={60} 
+                    className="rounded-full border-2 border-white dark:border-[#161616]"
+                  />
+                  <div className="absolute -bottom-1 -right-1 bg-green-500 p-1 rounded-full border-2 border-white dark:border-[#161616]"></div>
+                </div>
                 <div>
-                  <h3 className="font-bold text-gray-800">Dra. Ana Muller</h3>
-                  <p className="text-gray-600 text-sm">Psicóloga Clínica</p>
+                  <h2 className="text-lg font-semibold text-[#161616] dark:text-[#D7D7D6] natus-heading">{appointment.therapist.name}</h2>
+                  <p className="text-sm text-[#6B6B6B] dark:text-[#D7D7D6] natus-body">{appointment.therapist.specialty}</p>
                 </div>
               </div>
-              
-              <div className="flex items-center py-3 border-b border-gray-100">
-                <Calendar className="w-5 h-5 text-purple-600 mr-3" />
-                <div>
-                  <h3 className="font-medium text-gray-800">Miércoles, 27 de Marzo de 2024</h3>
+
+              <div className="space-y-4">
+                <div className="flex items-start">
+                  <Calendar className="w-5 h-5 text-[#142619] dark:text-[#8A7D68] mt-0.5 mr-3 flex-shrink-0" />
+                  <div>
+                    <p className="font-medium text-[#161616] dark:text-[#D7D7D6] natus-heading">Fecha</p>
+                    <p className="text-[#6B6B6B] dark:text-[#D7D7D6] natus-body">{appointment.date}</p>
+                  </div>
                 </div>
-              </div>
-              
-              <div className="flex items-center py-3 border-b border-gray-100">
-                <Clock className="w-5 h-5 text-purple-600 mr-3" />
-                <div>
-                  <h3 className="font-medium text-gray-800">16:00 - 16:45 (45 minutos)</h3>
+
+                <div className="flex items-start">
+                  <Clock className="w-5 h-5 text-[#142619] dark:text-[#8A7D68] mt-0.5 mr-3 flex-shrink-0" />
+                  <div>
+                    <p className="font-medium text-[#161616] dark:text-[#D7D7D6] natus-heading">Hora</p>
+                    <p className="text-[#6B6B6B] dark:text-[#D7D7D6] natus-body">{appointment.time} ({appointment.duration})</p>
+                  </div>
                 </div>
-              </div>
-              
-              <div className="flex items-center py-3 border-b border-gray-100">
-                <Video className="w-5 h-5 text-purple-600 mr-3" />
-                <div>
-                  <h3 className="font-medium text-gray-800">Sesión por videollamada</h3>
-                  <p className="text-sm text-gray-600">Recibirás un enlace por correo electrónico 10 minutos antes de la sesión</p>
+
+                <div className="flex items-start">
+                  {appointment.type === "Videollamada" ? (
+                    <Video className="w-5 h-5 text-[#142619] dark:text-[#8A7D68] mt-0.5 mr-3 flex-shrink-0" />
+                  ) : (
+                    <MapPin className="w-5 h-5 text-[#142619] dark:text-[#8A7D68] mt-0.5 mr-3 flex-shrink-0" />
+                  )}
+                  <div>
+                    <p className="font-medium text-[#161616] dark:text-[#D7D7D6] natus-heading">Tipo de sesión</p>
+                    <p className="text-[#6B6B6B] dark:text-[#D7D7D6] natus-body">{appointment.type}</p>
+                    {appointment.type === "Videollamada" && (
+                      <p className="text-sm text-[#6B6B6B] dark:text-[#D7D7D6] mt-1 natus-body">
+                        Recibirás un enlace 15 minutos antes de la sesión
+                      </p>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-            <h2 className="text-lg font-bold text-gray-800 mb-4">Información importante</h2>
-            
-            <div className="space-y-4">
-              <div>
-                <h3 className="font-medium text-gray-800 mb-1">Política de cancelación</h3>
-                <p className="text-sm text-gray-600">Puedes cancelar o reprogramar hasta 24 horas antes de la sesión sin cargo. Cancelaciones posteriores incurrirán en un cargo del 50%.</p>
+            <div className="mb-6">
+              <h3 className="font-semibold text-[#161616] dark:text-[#D7D7D6] mb-3 natus-heading">Información importante</h3>
+              <div className="bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-400 dark:border-yellow-600 p-4 rounded-r-md">
+                <div className="flex">
+                  <AlertCircle className="h-6 w-6 text-yellow-600 dark:text-yellow-500 mr-3 flex-shrink-0" />
+                  <div>
+                    <p className="text-sm text-yellow-700 dark:text-yellow-200 font-medium natus-heading">Política de cancelación</p>
+                    <p className="text-sm text-yellow-600 dark:text-yellow-300 mt-1 natus-body">
+                      Puedes cancelar hasta 24 horas antes sin costo. Cancelaciones posteriores tendrán un cargo del 50%.
+                    </p>
+                  </div>
+                </div>
               </div>
-              
-              <div>
-                <h3 className="font-medium text-gray-800 mb-1">Preparación para la sesión</h3>
-                <p className="text-sm text-gray-600">Asegúrate de tener una conexión estable a internet y estar en un lugar tranquilo y privado para tu sesión. Recomendamos usar auriculares.</p>
-              </div>
-              
-              <div>
-                <h3 className="font-medium text-gray-800 mb-1">Recordatorio</h3>
-                <p className="text-sm text-gray-600">Recibirás un recordatorio por correo electrónico y SMS 24 horas antes de tu cita.</p>
-              </div>
+            </div>
+
+            <div className="mb-6">
+              <h3 className="font-semibold text-[#161616] dark:text-[#D7D7D6] mb-3 natus-heading">Prepárate para tu sesión</h3>
+              <ul className="space-y-2 text-[#6B6B6B] dark:text-[#D7D7D6] list-disc list-inside pl-1 natus-body">
+                <li>Busca un lugar tranquilo y privado para tu sesión</li>
+                <li>Asegúrate de tener una buena conexión a internet</li>
+                <li>Ten papel y lápiz a mano para tomar notas</li>
+                <li>Piensa con antelación en los temas que quieres abordar</li>
+              </ul>
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="outline" className="flex items-center">
-              <Download className="mr-2 h-4 w-4" />
-              Añadir a calendario
-            </Button>
-            <Link 
-              href="/dashboard"
-              className="inline-flex justify-center items-center px-6 py-2.5 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
-            >
-              Ir al dashboard 
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
+          <div className="p-6 md:p-8 bg-[#F5F5F5] dark:bg-[#0E1920]/60">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <button
+                onClick={addToCalendar}
+                className="flex justify-center items-center px-4 py-3 bg-white dark:bg-[#161616] border border-[#D7D7D6] dark:border-[#161616] text-[#161616] dark:text-[#D7D7D6] rounded-lg hover:bg-[#F5F5F5] dark:hover:bg-[#0E1920] transition-colors natus-body"
+              >
+                <CalendarPlus className="h-5 w-5 mr-2" />
+                Agregar a calendario
+              </button>
+              <button
+                onClick={() => router.push('/dashboard')}
+                className="flex justify-center items-center px-4 py-3 bg-gradient-to-r from-[#142619] to-[#0E1920] hover:from-[#0E1920] hover:to-[#142619] text-white rounded-lg transition-all duration-300 shadow-sm hover:shadow natus-body"
+              >
+                <Home className="h-5 w-5 mr-2" />
+                Ir al dashboard
+              </button>
+            </div>
           </div>
-        </div>
-      </main>
+        </motion.main>
+      </div>
     </div>
   );
 } 

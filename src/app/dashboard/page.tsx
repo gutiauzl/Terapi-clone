@@ -1,19 +1,83 @@
+'use client';
+
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import DashboardHeader from "@/components/dashboard-header";
 import DashboardWidgets from "@/components/dashboard-widgets";
 import QuestionnaireWrapper from "@/components/questionnaire-wrapper";
-import { createClient } from "../../../supabase/server";
-import { redirect } from "next/navigation";
+import { createClient } from "../../../supabase/client";
+import { User } from "@supabase/supabase-js";
 
-export default async function Dashboard() {
-  const supabase = await createClient();
+// Create a single supabase client instance
+const supabase = createClient();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+export default function Dashboard() {
+  const router = useRouter();
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  if (!user) {
-    return redirect("/sign-in");
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        console.log("Checking regular dashboard access...");
+        
+        // Verificar si hay una sesión activa
+        const { data } = await supabase.auth.getSession();
+        console.log("Session check result:", data.session ? "Session found" : "No session");
+        
+        if (!data.session) {
+          console.log("No session found - redirecting to sign-in");
+          localStorage.removeItem('auth_redirecting');
+          window.location.href = "/sign-in";
+          return;
+        }
+        
+        // Obtener detalles del usuario desde la sesión actual
+        const userData = { user: data.session.user };
+        console.log("User data from session:", userData.user.email);
+        
+        // Verificar el tipo de usuario en metadata
+        const userType = userData.user.user_metadata?.user_type;
+        console.log("User type from metadata:", userType);
+        
+        // Redirigir al facilitador a su dashboard específico y denegar acceso
+        if (userType === 'facilitador' || userType === 'facilitator') {
+          console.log("User is a facilitator - access to client dashboard denied");
+          alert("Su cuenta es de facilitador. Redirigiendo al portal de facilitadores.");
+          // Redirigir al dashboard del facilitador
+          window.location.href = "/facilitator/dashboard";
+          return;
+        }
+        
+        // Garantizar que cualquier flag de facilitador se elimine 
+        localStorage.removeItem('is_facilitator');
+        
+        // Establecer datos del usuario para el dashboard del cliente
+        setUser(userData.user);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error checking user session:", error);
+        localStorage.removeItem('auth_redirecting');
+        window.location.href = "/sign-in";
+      }
+    };
+    
+    checkUser();
+  }, []);
+  
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#D7D7D6]/20 dark:bg-[#161616] flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-t-[#142619] dark:border-t-[#8A7D68] border-[#D7D7D6]/30 dark:border-[#161616]/30 rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-[#6B6B6B] dark:text-[#D7D7D6] natus-body">Cargando panel de usuario...</p>
+        </div>
+      </div>
+    );
   }
+
+  // Si no hay usuario, no renderizar el dashboard
+  if (!user) return null;
 
   // Sample data for dashboard widgets
   const nextAppointment = {
@@ -80,7 +144,7 @@ export default async function Dashboard() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-[#D7D7D6]/20 dark:bg-[#161616]">
       <DashboardHeader user={user} />
       
       {/* Questionnaire for new users */}
@@ -102,8 +166,8 @@ export default async function Dashboard() {
 
       {/* Animated background elements */}
       <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-10 w-72 h-72 bg-purple-200 dark:bg-purple-800 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl opacity-30 dark:opacity-20 animate-blob" />
-        <div className="absolute top-3/4 right-10 w-72 h-72 bg-blue-200 dark:bg-blue-800 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl opacity-30 dark:opacity-20 animate-blob animation-delay-2000" />
+        <div className="absolute top-1/4 left-10 w-72 h-72 bg-[#8A7D68]/30 dark:bg-[#8A7D68]/20 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl opacity-30 dark:opacity-20 animate-blob" />
+        <div className="absolute top-3/4 right-10 w-72 h-72 bg-[#D7D7D6]/40 dark:bg-[#D7D7D6]/20 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl opacity-30 dark:opacity-20 animate-blob animation-delay-2000" />
       </div>
     </div>
   );

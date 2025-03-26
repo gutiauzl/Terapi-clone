@@ -167,13 +167,13 @@ export default function AppointmentsClient({
     switch(status) {
       case 'confirmada':
         return {
-          color: 'text-green-600 dark:text-green-400 bg-green-100 dark:bg-green-900/30',
+          color: 'text-[#142619] dark:text-[#8A7D68] bg-[#142619]/10 dark:bg-[#8A7D68]/20',
           icon: <CheckCircle className="w-4 h-4 mr-1" />,
           text: 'Confirmada'
         };
       case 'pendiente':
         return {
-          color: 'text-yellow-600 dark:text-yellow-400 bg-yellow-100 dark:bg-yellow-900/30',
+          color: 'text-[#8A7D68] dark:text-[#D7D7D6] bg-[#8A7D68]/20 dark:bg-[#8A7D68]/10',
           icon: <AlertCircle className="w-4 h-4 mr-1" />,
           text: 'Pendiente'
         };
@@ -185,13 +185,13 @@ export default function AppointmentsClient({
         };
       case 'completada':
         return {
-          color: 'text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30',
+          color: 'text-[#142619] dark:text-[#8A7D68] bg-[#142619]/10 dark:bg-[#8A7D68]/20',
           icon: <Check className="w-4 h-4 mr-1" />,
           text: 'Completada'
         };
       default:
         return {
-          color: 'text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800',
+          color: 'text-[#6B6B6B] dark:text-[#D7D7D6] bg-[#D7D7D6]/50 dark:bg-[#161616]/50',
           icon: <Clock4 className="w-4 h-4 mr-1" />,
           text: status
         };
@@ -202,15 +202,15 @@ export default function AppointmentsClient({
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Mis Citas</h1>
-          <p className="text-gray-600 dark:text-gray-300 mt-1">
+          <h1 className="text-2xl font-bold text-[#161616] dark:text-[#D7D7D6] mb-4 natus-heading">Mis Citas</h1>
+          <p className="text-[#6B6B6B] dark:text-[#D7D7D6] mt-1 natus-body">
             Gestiona tus sesiones de terapia pasadas y futuras
           </p>
         </div>
         
         <Link 
           href="/book-appointment"
-          className="inline-flex items-center justify-center px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+          className="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-[#142619] to-[#0E1920] hover:from-[#0E1920] hover:to-[#142619] text-white rounded-full transition-colors natus-body"
         >
           <CalendarIcon className="w-4 h-4 mr-2" />
           Agendar nueva cita
@@ -218,36 +218,36 @@ export default function AppointmentsClient({
       </div>
 
       {/* Tabs y búsqueda */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/30 overflow-hidden">
-        <div className="border-b border-gray-100 dark:border-gray-700">
+      <div className="bg-white dark:bg-[#161616] rounded-xl shadow-md dark:shadow-[#0E1920]/30 overflow-hidden">
+        <div className="border-b border-[#D7D7D6] dark:border-[#0E1920]">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4">
             <div className="flex space-x-1 mb-4 sm:mb-0">
               <button
                 onClick={() => setActiveTab('upcoming')}
-                className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors natus-body ${
                   activeTab === 'upcoming'
-                    ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400'
-                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                    ? 'bg-[#142619]/10 dark:bg-[#8A7D68]/20 text-[#142619] dark:text-[#8A7D68]'
+                    : 'text-[#6B6B6B] dark:text-[#D7D7D6] hover:bg-[#D7D7D6]/20 dark:hover:bg-[#0E1920]/20'
                 }`}
               >
                 Próximas citas
               </button>
               <button
                 onClick={() => setActiveTab('past')}
-                className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors natus-body ${
                   activeTab === 'past'
-                    ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400'
-                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                    ? 'bg-[#142619]/10 dark:bg-[#8A7D68]/20 text-[#142619] dark:text-[#8A7D68]'
+                    : 'text-[#6B6B6B] dark:text-[#D7D7D6] hover:bg-[#D7D7D6]/20 dark:hover:bg-[#0E1920]/20'
                 }`}
               >
                 Citas pasadas
               </button>
               <button
                 onClick={() => setActiveTab('calendar')}
-                className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors natus-body ${
                   activeTab === 'calendar'
-                    ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400'
-                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                    ? 'bg-[#142619]/10 dark:bg-[#8A7D68]/20 text-[#142619] dark:text-[#8A7D68]'
+                    : 'text-[#6B6B6B] dark:text-[#D7D7D6] hover:bg-[#D7D7D6]/20 dark:hover:bg-[#0E1920]/20'
                 }`}
               >
                 Calendario
@@ -261,12 +261,12 @@ export default function AppointmentsClient({
                   placeholder="Buscar citas..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full py-2 pl-9 pr-3 text-sm bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:text-white"
+                  className="w-full py-2 pl-9 pr-3 text-sm bg-[#D7D7D6]/20 dark:bg-[#0E1920]/50 border border-[#D7D7D6] dark:border-[#0E1920] rounded-l-lg focus:outline-none focus:ring-2 focus:ring-[#142619] dark:focus:ring-[#8A7D68] focus:border-transparent dark:text-[#D7D7D6] natus-body"
                 />
-                <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
+                <Search className="absolute left-3 top-2.5 h-4 w-4 text-[#6B6B6B] dark:text-[#D7D7D6]" />
               </div>
-              <button className="flex items-center justify-center px-3 py-2 bg-gray-100 dark:bg-gray-600 border border-gray-200 dark:border-gray-600 rounded-r-lg">
-                <Filter className="h-4 w-4 text-gray-500 dark:text-gray-300" />
+              <button className="flex items-center justify-center px-3 py-2 bg-[#D7D7D6]/30 dark:bg-[#0E1920]/50 border border-[#D7D7D6] dark:border-[#0E1920] rounded-r-lg">
+                <Filter className="h-4 w-4 text-[#6B6B6B] dark:text-[#D7D7D6]" />
               </button>
             </div>
           </div>
@@ -274,13 +274,13 @@ export default function AppointmentsClient({
           {/* View toggle (only visible for non-calendar views) */}
           {activeTab !== 'calendar' && (
             <div className="flex justify-end px-4 pb-3">
-              <div className="bg-gray-100 dark:bg-gray-700 p-1 rounded-lg flex space-x-1">
+              <div className="bg-[#D7D7D6]/30 dark:bg-[#0E1920]/30 p-1 rounded-lg flex space-x-1">
                 <button
                   onClick={() => setView('grid')}
                   className={`p-1.5 rounded ${
                     view === 'grid' 
-                      ? 'bg-white dark:bg-gray-600 shadow-sm' 
-                      : 'text-gray-500 dark:text-gray-400'
+                      ? 'bg-white dark:bg-[#161616] shadow-sm' 
+                      : 'text-[#6B6B6B] dark:text-[#D7D7D6]'
                   }`}
                 >
                   <LayoutGrid className="h-4 w-4" />
@@ -289,8 +289,8 @@ export default function AppointmentsClient({
                   onClick={() => setView('list')}
                   className={`p-1.5 rounded ${
                     view === 'list' 
-                      ? 'bg-white dark:bg-gray-600 shadow-sm' 
-                      : 'text-gray-500 dark:text-gray-400'
+                      ? 'bg-white dark:bg-[#161616] shadow-sm' 
+                      : 'text-[#6B6B6B] dark:text-[#D7D7D6]'
                   }`}
                 >
                   <List className="h-4 w-4" />
@@ -306,14 +306,14 @@ export default function AppointmentsClient({
             <div>
               {filteredUpcomingAppointments.length === 0 ? (
                 <div className="text-center py-12">
-                  <CalendarIcon className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No tienes citas próximas</h3>
-                  <p className="text-gray-500 dark:text-gray-400 mb-4">
+                  <CalendarIcon className="mx-auto h-12 w-12 text-[#6B6B6B] dark:text-[#D7D7D6] mb-4" />
+                  <h3 className="text-lg font-medium text-[#161616] dark:text-[#D7D7D6] mb-2 natus-heading">No tienes citas próximas</h3>
+                  <p className="text-[#6B6B6B] dark:text-[#D7D7D6] mb-4 natus-body">
                     Agenda una cita con uno de nuestros terapeutas.
                   </p>
                   <Link
                     href="/therapist-matches"
-                    className="inline-flex items-center text-purple-600 dark:text-purple-400"
+                    className="inline-flex items-center text-[#142619] dark:text-[#8A7D68] natus-body"
                   >
                     Ver terapeutas recomendados
                   </Link>
@@ -327,7 +327,7 @@ export default function AppointmentsClient({
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="flex flex-col md:flex-row md:items-center justify-between p-4 border border-gray-100 dark:border-gray-700 rounded-xl"
+                        className="flex flex-col md:flex-row md:items-center justify-between p-4 border border-[#D7D7D6] dark:border-[#0E1920] rounded-xl"
                       >
                         <div className="flex items-start mb-4 md:mb-0">
                           <div className="relative mr-4">
@@ -336,15 +336,15 @@ export default function AppointmentsClient({
                               alt={appointment.therapistName} 
                               width={60} 
                               height={60} 
-                              className="rounded-full border-2 border-white dark:border-gray-700 shadow-md"
+                              className="rounded-full border-2 border-white dark:border-[#161616] shadow-md"
                             />
-                            <div className="absolute -bottom-1 -right-1 bg-green-500 p-1 rounded-full border-2 border-white dark:border-gray-700"></div>
+                            <div className="absolute -bottom-1 -right-1 bg-[#142619] dark:bg-[#8A7D68] p-1 rounded-full border-2 border-white dark:border-[#161616]"></div>
                           </div>
                           <div>
-                            <h3 className="font-medium text-gray-900 dark:text-white">{appointment.therapistName}</h3>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">{appointment.specialty}</p>
+                            <h3 className="font-medium text-[#161616] dark:text-[#D7D7D6] natus-heading">{appointment.therapistName}</h3>
+                            <p className="text-sm text-[#6B6B6B] dark:text-[#D7D7D6] natus-body">{appointment.specialty}</p>
                             <div className="flex flex-wrap gap-2 mt-2">
-                              <span className={`inline-flex items-center text-xs px-2 py-1 rounded-full ${getAppointmentStatus(appointment.status).color}`}>
+                              <span className={`inline-flex items-center text-xs px-2 py-1 rounded-full ${getAppointmentStatus(appointment.status).color} natus-body`}>
                                 {getAppointmentStatus(appointment.status).icon}
                                 {getAppointmentStatus(appointment.status).text}
                               </span>
@@ -354,22 +354,22 @@ export default function AppointmentsClient({
                         
                         <div className="flex flex-col items-start md:items-center mb-4 md:mb-0">
                           <div className="flex items-center mb-1">
-                            <CalendarIcon className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400 mr-1" />
-                            <span className="text-sm text-gray-700 dark:text-gray-300">{formatDateOnly(appointment.date)}</span>
+                            <CalendarIcon className="w-3.5 h-3.5 text-[#6B6B6B] dark:text-[#D7D7D6] mr-1" />
+                            <span className="text-sm text-[#161616] dark:text-[#D7D7D6] natus-body">{formatDateOnly(appointment.date)}</span>
                           </div>
                           <div className="flex items-center mb-1">
-                            <Clock className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400 mr-1" />
-                            <span className="text-sm text-gray-700 dark:text-gray-300">
+                            <Clock className="w-3.5 h-3.5 text-[#6B6B6B] dark:text-[#D7D7D6] mr-1" />
+                            <span className="text-sm text-[#161616] dark:text-[#D7D7D6] natus-body">
                               {formatTimeOnly(appointment.date)} ({appointment.duration} min)
                             </span>
                           </div>
                           <div className="flex items-center">
                             {appointment.type === 'videollamada' ? (
-                              <Video className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400 mr-1" />
+                              <Video className="w-3.5 h-3.5 text-[#6B6B6B] dark:text-[#D7D7D6] mr-1" />
                             ) : (
-                              <MapPin className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400 mr-1" />
+                              <MapPin className="w-3.5 h-3.5 text-[#6B6B6B] dark:text-[#D7D7D6] mr-1" />
                             )}
-                            <span className="text-sm text-gray-700 dark:text-gray-300 capitalize">
+                            <span className="text-sm text-[#161616] dark:text-[#D7D7D6] capitalize natus-body">
                               {appointment.type}
                             </span>
                           </div>
@@ -378,13 +378,13 @@ export default function AppointmentsClient({
                         <div className="flex flex-wrap gap-2">
                           <Link 
                             href={`/appointments/${appointment.id}`}
-                            className="inline-flex items-center justify-center px-3 py-1.5 text-sm bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+                            className="inline-flex items-center justify-center px-3 py-1.5 text-sm bg-gradient-to-r from-[#142619] to-[#0E1920] hover:from-[#0E1920] hover:to-[#142619] text-white rounded-full transition-colors natus-body"
                           >
                             Detalles
                           </Link>
                           <Link 
                             href={`/messaging/${appointment.id}`}
-                            className="inline-flex items-center justify-center px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                            className="inline-flex items-center justify-center px-3 py-1.5 text-sm border border-[#D7D7D6] dark:border-[#0E1920] rounded-full hover:bg-[#D7D7D6]/20 dark:hover:bg-[#0E1920]/50 transition-colors natus-body"
                           >
                             <MessageSquare className="w-3.5 h-3.5 mr-1" />
                             Mensaje
@@ -401,7 +401,7 @@ export default function AppointmentsClient({
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.3 }}
-                        className="flex flex-col p-5 border border-gray-100 dark:border-gray-700 rounded-xl hover:shadow-md transition-shadow"
+                        className="flex flex-col p-5 border border-[#D7D7D6] dark:border-[#0E1920] rounded-xl hover:shadow-md transition-shadow bg-white dark:bg-[#161616]"
                       >
                         <div className="flex items-start mb-4">
                           <Image 
@@ -409,60 +409,60 @@ export default function AppointmentsClient({
                             alt={appointment.therapistName} 
                             width={50} 
                             height={50} 
-                            className="rounded-full border-2 border-white dark:border-gray-700 shadow-md mr-3"
+                            className="rounded-full border-2 border-white dark:border-[#161616] shadow-md mr-3"
                           />
                           <div>
-                            <h3 className="font-medium text-gray-900 dark:text-white">{appointment.therapistName}</h3>
-                            <p className="text-xs text-gray-500 dark:text-gray-400">{appointment.specialty}</p>
+                            <h3 className="font-medium text-[#161616] dark:text-[#D7D7D6] natus-heading">{appointment.therapistName}</h3>
+                            <p className="text-xs text-[#6B6B6B] dark:text-[#D7D7D6] natus-body">{appointment.specialty}</p>
                           </div>
                         </div>
                         
                         <div className="flex flex-col space-y-2 mb-4">
                           <div className="flex">
                             <div className="w-9 flex-shrink-0 flex justify-center">
-                              <CalendarIcon className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                              <CalendarIcon className="w-4 h-4 text-[#142619] dark:text-[#8A7D68]" />
                             </div>
-                            <span className="text-sm text-gray-700 dark:text-gray-300">{formatDateOnly(appointment.date)}</span>
+                            <span className="text-sm text-[#161616] dark:text-[#D7D7D6] natus-body">{formatDateOnly(appointment.date)}</span>
                           </div>
                           <div className="flex">
                             <div className="w-9 flex-shrink-0 flex justify-center">
-                              <Clock className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                              <Clock className="w-4 h-4 text-[#142619] dark:text-[#8A7D68]" />
                             </div>
-                            <span className="text-sm text-gray-700 dark:text-gray-300">
+                            <span className="text-sm text-[#161616] dark:text-[#D7D7D6] natus-body">
                               {formatTimeOnly(appointment.date)} ({appointment.duration} min)
                             </span>
                           </div>
                           <div className="flex">
                             <div className="w-9 flex-shrink-0 flex justify-center">
                               {appointment.type === 'videollamada' ? (
-                                <Video className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                                <Video className="w-4 h-4 text-[#142619] dark:text-[#8A7D68]" />
                               ) : (
-                                <MapPin className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                                <MapPin className="w-4 h-4 text-[#142619] dark:text-[#8A7D68]" />
                               )}
                             </div>
-                            <span className="text-sm text-gray-700 dark:text-gray-300 capitalize">
+                            <span className="text-sm text-[#161616] dark:text-[#D7D7D6] capitalize natus-body">
                               {appointment.type}
                             </span>
                           </div>
                         </div>
                         
                         <div className="flex items-center mb-4">
-                          <span className={`inline-flex items-center text-xs px-2 py-1 rounded-full ${getAppointmentStatus(appointment.status).color}`}>
+                          <span className={`inline-flex items-center text-xs px-2 py-1 rounded-full ${getAppointmentStatus(appointment.status).color} natus-body`}>
                             {getAppointmentStatus(appointment.status).icon}
                             {getAppointmentStatus(appointment.status).text}
                           </span>
                         </div>
                         
-                        <div className="flex gap-2 mt-auto pt-3 border-t border-gray-100 dark:border-gray-700">
+                        <div className="flex gap-2 mt-auto pt-3 border-t border-[#D7D7D6] dark:border-[#0E1920]">
                           <Link 
                             href={`/appointments/${appointment.id}`}
-                            className="flex-1 inline-flex items-center justify-center px-3 py-1.5 text-sm bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+                            className="flex-1 inline-flex items-center justify-center px-3 py-1.5 text-sm bg-gradient-to-r from-[#142619] to-[#0E1920] hover:from-[#0E1920] hover:to-[#142619] text-white rounded-full transition-colors natus-body"
                           >
                             Detalles
                           </Link>
                           <Link 
                             href={`/messaging/${appointment.id}`}
-                            className="flex-1 inline-flex items-center justify-center px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                            className="flex-1 inline-flex items-center justify-center px-2 py-1.5 text-sm border border-[#D7D7D6] dark:border-[#0E1920] rounded-full hover:bg-[#D7D7D6]/20 dark:hover:bg-[#0E1920]/50 transition-colors natus-body"
                           >
                             <MessageSquare className="w-3.5 h-3.5" />
                           </Link>
@@ -480,9 +480,9 @@ export default function AppointmentsClient({
             <div>
               {filteredPastAppointments.length === 0 ? (
                 <div className="text-center py-12">
-                  <CalendarIcon className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No tienes citas pasadas</h3>
-                  <p className="text-gray-500 dark:text-gray-400 mb-4">
+                  <CalendarIcon className="mx-auto h-12 w-12 text-[#6B6B6B] dark:text-[#D7D7D6] mb-4" />
+                  <h3 className="text-lg font-medium text-[#161616] dark:text-[#D7D7D6] mb-2 natus-heading">No tienes citas pasadas</h3>
+                  <p className="text-[#6B6B6B] dark:text-[#D7D7D6] mb-4 natus-body">
                     Aquí verás el historial de tus sesiones de terapia.
                   </p>
                 </div>
@@ -495,7 +495,7 @@ export default function AppointmentsClient({
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="flex flex-col md:flex-row md:items-center justify-between p-4 border border-gray-100 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-gray-800/50"
+                        className="flex flex-col md:flex-row md:items-center justify-between p-4 border border-[#D7D7D6] dark:border-[#0E1920] rounded-xl bg-[#D7D7D6]/50 dark:bg-[#0E1920]/50"
                       >
                         <div className="flex items-start mb-4 md:mb-0">
                           <Image 
@@ -503,13 +503,13 @@ export default function AppointmentsClient({
                             alt={appointment.therapistName} 
                             width={60} 
                             height={60} 
-                            className="rounded-full border-2 border-white dark:border-gray-700 shadow-md mr-4"
+                            className="rounded-full border-2 border-white dark:border-[#161616] shadow-md mr-4"
                           />
                           <div>
-                            <h3 className="font-medium text-gray-900 dark:text-white">{appointment.therapistName}</h3>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">{appointment.specialty}</p>
+                            <h3 className="font-medium text-[#161616] dark:text-[#D7D7D6] natus-heading">{appointment.therapistName}</h3>
+                            <p className="text-sm text-[#6B6B6B] dark:text-[#D7D7D6] natus-body">{appointment.specialty}</p>
                             <div className="flex flex-wrap gap-2 mt-2">
-                              <span className={`inline-flex items-center text-xs px-2 py-1 rounded-full ${getAppointmentStatus(appointment.status).color}`}>
+                              <span className={`inline-flex items-center text-xs px-2 py-1 rounded-full ${getAppointmentStatus(appointment.status).color} natus-body`}>
                                 {getAppointmentStatus(appointment.status).icon}
                                 {getAppointmentStatus(appointment.status).text}
                               </span>
@@ -519,22 +519,22 @@ export default function AppointmentsClient({
                         
                         <div className="flex flex-col items-start md:items-center mb-4 md:mb-0">
                           <div className="flex items-center mb-1">
-                            <CalendarIcon className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400 mr-1" />
-                            <span className="text-sm text-gray-700 dark:text-gray-300">{formatDateOnly(appointment.date)}</span>
+                            <CalendarIcon className="w-3.5 h-3.5 text-[#6B6B6B] dark:text-[#D7D7D6] mr-1" />
+                            <span className="text-sm text-[#161616] dark:text-[#D7D7D6] natus-body">{formatDateOnly(appointment.date)}</span>
                           </div>
                           <div className="flex items-center mb-1">
-                            <Clock className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400 mr-1" />
-                            <span className="text-sm text-gray-700 dark:text-gray-300">
+                            <Clock className="w-3.5 h-3.5 text-[#6B6B6B] dark:text-[#D7D7D6] mr-1" />
+                            <span className="text-sm text-[#161616] dark:text-[#D7D7D6] natus-body">
                               {formatTimeOnly(appointment.date)} ({appointment.duration} min)
                             </span>
                           </div>
                           <div className="flex items-center">
                             {appointment.type === 'videollamada' ? (
-                              <Video className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400 mr-1" />
+                              <Video className="w-3.5 h-3.5 text-[#6B6B6B] dark:text-[#D7D7D6] mr-1" />
                             ) : (
-                              <MapPin className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400 mr-1" />
+                              <MapPin className="w-3.5 h-3.5 text-[#6B6B6B] dark:text-[#D7D7D6] mr-1" />
                             )}
-                            <span className="text-sm text-gray-700 dark:text-gray-300 capitalize">
+                            <span className="text-sm text-[#161616] dark:text-[#D7D7D6] capitalize natus-body">
                               {appointment.type}
                             </span>
                           </div>
@@ -543,7 +543,7 @@ export default function AppointmentsClient({
                         <div>
                           <Link 
                             href={`/appointments/${appointment.id}`}
-                            className="inline-flex items-center justify-center px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                            className="inline-flex items-center justify-center px-3 py-1.5 text-sm border border-[#D7D7D6] dark:border-[#0E1920] rounded-lg hover:bg-[#D7D7D6]/20 dark:hover:bg-[#0E1920]/50 transition-colors natus-body"
                           >
                             Ver detalles
                           </Link>
@@ -559,7 +559,7 @@ export default function AppointmentsClient({
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.3 }}
-                        className="flex flex-col p-5 border border-gray-100 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-gray-800/50"
+                        className="flex flex-col p-5 border border-[#D7D7D6] dark:border-[#0E1920] rounded-xl bg-[#D7D7D6]/50 dark:bg-[#0E1920]/50"
                       >
                         <div className="flex items-start mb-4">
                           <Image 
@@ -567,54 +567,54 @@ export default function AppointmentsClient({
                             alt={appointment.therapistName} 
                             width={50} 
                             height={50} 
-                            className="rounded-full border-2 border-white dark:border-gray-700 shadow-md mr-3"
+                            className="rounded-full border-2 border-white dark:border-[#161616] shadow-md mr-3"
                           />
                           <div>
-                            <h3 className="font-medium text-gray-900 dark:text-white">{appointment.therapistName}</h3>
-                            <p className="text-xs text-gray-500 dark:text-gray-400">{appointment.specialty}</p>
+                            <h3 className="font-medium text-[#161616] dark:text-[#D7D7D6] natus-heading">{appointment.therapistName}</h3>
+                            <p className="text-xs text-[#6B6B6B] dark:text-[#D7D7D6] natus-body">{appointment.specialty}</p>
                           </div>
                         </div>
                         
                         <div className="flex flex-col space-y-2 mb-4">
                           <div className="flex">
                             <div className="w-9 flex-shrink-0 flex justify-center">
-                              <CalendarIcon className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                              <CalendarIcon className="w-4 h-4 text-[#142619] dark:text-[#8A7D68]" />
                             </div>
-                            <span className="text-sm text-gray-700 dark:text-gray-300">{formatDateOnly(appointment.date)}</span>
+                            <span className="text-sm text-[#161616] dark:text-[#D7D7D6] natus-body">{formatDateOnly(appointment.date)}</span>
                           </div>
                           <div className="flex">
                             <div className="w-9 flex-shrink-0 flex justify-center">
-                              <Clock className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                              <Clock className="w-4 h-4 text-[#142619] dark:text-[#8A7D68]" />
                             </div>
-                            <span className="text-sm text-gray-700 dark:text-gray-300">
+                            <span className="text-sm text-[#161616] dark:text-[#D7D7D6] natus-body">
                               {formatTimeOnly(appointment.date)} ({appointment.duration} min)
                             </span>
                           </div>
                           <div className="flex">
                             <div className="w-9 flex-shrink-0 flex justify-center">
                               {appointment.type === 'videollamada' ? (
-                                <Video className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                                <Video className="w-4 h-4 text-[#142619] dark:text-[#8A7D68]" />
                               ) : (
-                                <MapPin className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                                <MapPin className="w-4 h-4 text-[#142619] dark:text-[#8A7D68]" />
                               )}
                             </div>
-                            <span className="text-sm text-gray-700 dark:text-gray-300 capitalize">
+                            <span className="text-sm text-[#161616] dark:text-[#D7D7D6] capitalize natus-body">
                               {appointment.type}
                             </span>
                           </div>
                         </div>
                         
                         <div className="flex items-center mb-4">
-                          <span className={`inline-flex items-center text-xs px-2 py-1 rounded-full ${getAppointmentStatus(appointment.status).color}`}>
+                          <span className={`inline-flex items-center text-xs px-2 py-1 rounded-full ${getAppointmentStatus(appointment.status).color} natus-body`}>
                             {getAppointmentStatus(appointment.status).icon}
                             {getAppointmentStatus(appointment.status).text}
                           </span>
                         </div>
                         
-                        <div className="flex justify-center mt-auto pt-3 border-t border-gray-100 dark:border-gray-700">
+                        <div className="flex justify-center mt-auto pt-3 border-t border-[#D7D7D6] dark:border-[#0E1920]">
                           <Link 
                             href={`/appointments/${appointment.id}`}
-                            className="inline-flex items-center justify-center px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                            className="inline-flex items-center justify-center px-3 py-1.5 text-sm border border-[#D7D7D6] dark:border-[#0E1920] rounded-lg hover:bg-[#D7D7D6]/20 dark:hover:bg-[#0E1920]/50 transition-colors natus-body"
                           >
                             Ver detalles
                           </Link>
@@ -633,24 +633,24 @@ export default function AppointmentsClient({
               <div className="flex items-center justify-between mb-6">
                 <button
                   onClick={() => navigateMonth('prev')}
-                  className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                  className="p-2 rounded-full hover:bg-[#D7D7D6]/20 dark:hover:bg-[#0E1920]/50 transition-colors"
                 >
-                  <ChevronLeft className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+                  <ChevronLeft className="w-5 h-5 text-[#6B6B6B] dark:text-[#D7D7D6]" />
                 </button>
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white capitalize">
+                <h3 className="text-lg font-medium text-[#161616] dark:text-[#D7D7D6] capitalize natus-heading">
                   {getMonthYearString()}
                 </h3>
                 <button
                   onClick={() => navigateMonth('next')}
-                  className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                  className="p-2 rounded-full hover:bg-[#D7D7D6]/20 dark:hover:bg-[#0E1920]/50 transition-colors"
                 >
-                  <ChevronRight className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+                  <ChevronRight className="w-5 h-5 text-[#6B6B6B] dark:text-[#D7D7D6]" />
                 </button>
               </div>
               
               <div className="grid grid-cols-7 gap-1 mb-2">
                 {['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'].map((day, i) => (
-                  <div key={i} className="text-center text-xs text-gray-500 dark:text-gray-400 py-2 font-medium">
+                  <div key={i} className="text-center text-xs text-[#6B6B6B] dark:text-[#D7D7D6] py-2 font-medium natus-body">
                     {day}
                   </div>
                 ))}
@@ -665,15 +665,15 @@ export default function AppointmentsClient({
                     <div 
                       key={index}
                       className={`
-                        relative h-24 p-1 border rounded-lg transition-colors cursor-pointer hover:border-purple-400 dark:hover:border-purple-500
-                        ${isCurrentMonth(day) ? 'border-gray-200 dark:border-gray-700' : 'border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/50'}
-                        ${isToday(day) ? 'border-purple-400 dark:border-purple-500 bg-purple-50 dark:bg-purple-900/20' : ''}
+                        relative h-24 p-1 border rounded-lg transition-colors cursor-pointer hover:border-[#142619] dark:hover:border-[#8A7D68]
+                        ${isCurrentMonth(day) ? 'border-[#D7D7D6] dark:border-[#0E1920]' : 'border-[#D7D7D6]/50 dark:border-[#0E1920]/50 bg-[#D7D7D6]/10 dark:bg-[#0E1920]/10'}
+                        ${isToday(day) ? 'border-[#142619] dark:border-[#8A7D68] bg-[#142619]/5 dark:bg-[#8A7D68]/10' : ''}
                       `}
                     >
                       <div className="text-right mb-1">
                         <span className={`
                           text-sm inline-block rounded-full w-6 h-6 text-center leading-6
-                          ${isToday(day) ? 'bg-purple-600 text-white' : isCurrentMonth(day) ? 'text-gray-700 dark:text-gray-300' : 'text-gray-400 dark:text-gray-500'}
+                          ${isToday(day) ? 'bg-[#142619] dark:bg-[#8A7D68] text-white dark:text-[#161616]' : isCurrentMonth(day) ? 'text-[#161616] dark:text-[#D7D7D6]' : 'text-[#6B6B6B] dark:text-[#D7D7D6]/50'}
                         `}>
                           {day.getDate()}
                         </span>
@@ -682,20 +682,20 @@ export default function AppointmentsClient({
                       <div className="overflow-y-auto max-h-14 scrollbar-thin text-xs">
                         {dayAppointments.slice(0, 2).map((app, i) => (
                           <Link href={`/appointments/${app.id}`} key={i}>
-                            <div className="mb-1 p-1 text-xs rounded bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 truncate">
+                            <div className="mb-1 p-1 text-xs rounded bg-[#142619]/10 dark:bg-[#8A7D68]/20 text-[#142619] dark:text-[#8A7D68] truncate natus-body">
                               {formatTimeOnly(app.date)} • {app.therapistName.split(' ')[0]}
                             </div>
                           </Link>
                         ))}
                         {dayAppointments.length > 2 && (
-                          <div className="text-xs text-center text-gray-500 dark:text-gray-400">
+                          <div className="text-xs text-center text-[#6B6B6B] dark:text-[#D7D7D6] natus-body">
                             +{dayAppointments.length - 2} más
                           </div>
                         )}
                       </div>
                       
                       {hasAppointment && (
-                        <div className="absolute bottom-1 right-1 w-2 h-2 bg-purple-600 dark:bg-purple-400 rounded-full"></div>
+                        <div className="absolute bottom-1 right-1 w-2 h-2 bg-[#142619] dark:bg-[#8A7D68] rounded-full"></div>
                       )}
                     </div>
                   );

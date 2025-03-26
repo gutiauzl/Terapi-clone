@@ -2,11 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Fuentes personalizadas */
+/* Fuentes personalizadas - con fallbacks */
 @font-face {
   font-family: 'Cera Pro';
-  src: url('/fonts/CeraProThinItalic.woff2') format('woff2'),
-       url('/fonts/CeraProThinItalic.woff') format('woff');
+  src: local('Georgia'), local('Times New Roman');
   font-weight: 100;
   font-style: italic;
   font-display: swap;
@@ -14,8 +13,7 @@
 
 @font-face {
   font-family: 'Morely';
-  src: url('/fonts/MorelyPersonalUse.woff2') format('woff2'),
-       url('/fonts/MorelyPersonalUse.woff') format('woff');
+  src: local('Georgia'), local('Times New Roman');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -93,10 +91,10 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'Cera Pro', system-ui, sans-serif;
+    font-family: 'Cera Pro', Georgia, 'Times New Roman', serif;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Morely', system-ui, serif;
+    font-family: 'Morely', Georgia, 'Times New Roman', serif;
   }
 }
 
@@ -164,11 +162,11 @@
 }
 
 .natus-heading {
-  font-family: 'Morely', system-ui, serif;
+  font-family: 'Morely', Georgia, 'Times New Roman', serif;
 }
 
 .natus-body {
-  font-family: 'Cera Pro', system-ui, sans-serif;
-  font-weight: 100;
+  font-family: 'Cera Pro', Georgia, 'Times New Roman', serif;
+  font-weight: normal;
   font-style: italic;
 }

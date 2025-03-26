@@ -32,13 +32,19 @@ const nextConfig = {
   // Disable static optimization to avoid middleware issues
   poweredByHeader: false,
   reactStrictMode: true,
+  // Desactivar el uso de enlaces simbólicos
+  experimental: {
+    // Desactivar enlaces simbólicos que pueden causar problemas en Windows
+    disableSymlinking: true,
+  }
 };
 
 if (process.env.NEXT_PUBLIC_TEMPO) {
-  nextConfig["experimental"] = {
-    // NextJS 14.1.3 to 14.2.11:
-    swcPlugins: [[require.resolve("tempo-devtools/swc/0.90"), {}]],
-  };
+  if (!nextConfig.experimental) {
+    nextConfig.experimental = {};
+  }
+  // NextJS 14.1.3 to 14.2.11:
+  nextConfig.experimental.swcPlugins = [[require.resolve("tempo-devtools/swc/0.90"), {}]];
 }
 
 module.exports = nextConfig;
